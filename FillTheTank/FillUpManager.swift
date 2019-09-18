@@ -28,7 +28,7 @@ public struct FillUpManager {
     private(set) var fProgress: Double  // 0 to 1
     private(set) var fColor: UIColor
     
-    init(progressivelyFillUpWithDirection direction: FillingDirection, initialProgress: Double, fillUpColor: UIColor) {
+    public init(progressivelyFillUpWithDirection direction: FillingDirection, initialProgress: Double, fillUpColor: UIColor) {
         fDirection = direction
         fType = .progressively
         fColor = fillUpColor
@@ -38,7 +38,7 @@ public struct FillUpManager {
         
     }
     
-    init(constantlyFillUpWithDirection direction: FillingDirection, countDownDuration: Double, fillUpColor: UIColor) {
+    public init(constantlyFillUpWithDirection direction: FillingDirection, countDownDuration: Double, fillUpColor: UIColor) {
         fDirection = direction
         fType = .constantly
         fDuration = countDownDuration
