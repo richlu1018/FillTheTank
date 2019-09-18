@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-
-
 open class Tank: UIView {
     
     private var label: UILabel?
@@ -18,11 +16,12 @@ open class Tank: UIView {
     private var fillView: FillsView!
     private var dismissWhenTankIsfull: Bool = false
     public init(manager: FillUpManager) {
-        // Set up FillUpManager to provide animation info
-        self.fillUpManager = manager
+        self.fillUpManager = manager // Set up FillUpManager to provide animation info
         super.init(frame: .zero)
-        
+        self.translatesAutoresizingMaskIntoConstraints = false // Avoid automatically generated constraints
+        self.layoutIfNeeded()
     }
+    
 
     override open func layoutIfNeeded() {
         super.layoutIfNeeded()
