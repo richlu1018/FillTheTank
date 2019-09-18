@@ -1,15 +1,15 @@
 //
-//  FillTheTankTests.swift
-//  FillTheTankTests
+//  FillTheTankDemoTests.swift
+//  FillTheTankDemoTests
 //
 //  Created by Richard Lu on 2019/9/18.
 //  Copyright © 2019 Richard Lu. All rights reserved.
 //
 
 import XCTest
-@testable import FillTheTank
+@testable import FillTheTankDemo
 
-class FillTheTankTests: XCTestCase {
+class FillTheTankDemoTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
