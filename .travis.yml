@@ -1,0 +1,17 @@
+language: objective-c
+osx_image: xcode10.2
+env:
+  global:
+  - LC_CTYPE=en_US.UTF-8
+  - LANG=en_US.UTF-8
+  - PROJECT=FillTheTank.xcodeproj
+  - IOS_SDK=iphonesimulator11.0
+  - IOS_FRAMEWORK_SCHEME="FillTheTank"
+  - EXAMPLE_SCHEME="FillTheTankDemo"
+  matrix:
+    - TEST_SDK=iphonesimulator12.1 OS=12.1 NAME='iPhone XS'
+script:
+  - set -o pipefail
+  - xcodebuild -version
+  - xcodebuild -showsdks
+  - xcodebuild -list
