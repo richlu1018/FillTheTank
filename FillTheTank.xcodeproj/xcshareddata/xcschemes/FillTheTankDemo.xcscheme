@@ -28,7 +28,7 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "03C168A1233270ED00C6B65E"
+               BlueprintIdentifier = "03C168CA23327FEC00C6B65E"
                BuildableName = "FillTheTankTests.xctest"
                BlueprintName = "FillTheTankTests"
                ReferencedContainer = "container:FillTheTank.xcodeproj">
@@ -40,6 +40,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      codeCoverageEnabled = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
@@ -66,7 +67,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "03C168A1233270ED00C6B65E"
+               BlueprintIdentifier = "03C168CA23327FEC00C6B65E"
                BuildableName = "FillTheTankTests.xctest"
                BlueprintName = "FillTheTankTests"
                ReferencedContainer = "container:FillTheTank.xcodeproj">
