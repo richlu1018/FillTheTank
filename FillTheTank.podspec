@@ -15,5 +15,6 @@ This FillTheTank view will fills up with your custom color linearly or progressi
  
   s.ios.deployment_target = '11.0'
   s.source_files = 'FillTheTank/*'
+  s.exclude_files = 'FillTheTank/*.plist'
  
 end
