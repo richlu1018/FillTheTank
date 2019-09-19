@@ -15,13 +15,13 @@
 		03C1684123325E8D00C6B65E /* FillTheTankDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C1684023325E8D00C6B65E /* FillTheTankDemoTests.swift */; };
 		03C1684C23325E8D00C6B65E /* FillTheTankDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C1684B23325E8D00C6B65E /* FillTheTankDemoUITests.swift */; };
 		03C168CC23327FEC00C6B65E /* FillTheTank.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03C168C323327FEC00C6B65E /* FillTheTank.framework */; };
-		03C168D323327FEC00C6B65E /* FillTheTankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C168D223327FEC00C6B65E /* FillTheTankTests.swift */; };
 		03C168D523327FEC00C6B65E /* FillTheTank.h in Headers */ = {isa = PBXBuildFile; fileRef = 03C168C523327FEC00C6B65E /* FillTheTank.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		03C168D823327FEC00C6B65E /* FillTheTank.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03C168C323327FEC00C6B65E /* FillTheTank.framework */; };
 		03C168D923327FEC00C6B65E /* FillTheTank.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 03C168C323327FEC00C6B65E /* FillTheTank.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		03C168E023327FF600C6B65E /* FillsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345DD052330911F0079CC8C /* FillsView.swift */; };
 		03C168E123327FF600C6B65E /* TankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345DD03233080860079CC8C /* TankView.swift */; };
 		03C168E223327FF600C6B65E /* FillUpManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0385C83323308A28008099E1 /* FillUpManager.swift */; };
+		03C168E42333110200C6B65E /* FillTheTankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C168E32333110200C6B65E /* FillTheTankTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,8 +97,8 @@
 		03C168C523327FEC00C6B65E /* FillTheTank.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FillTheTank.h; sourceTree = "<group>"; };
 		03C168C623327FEC00C6B65E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03C168CB23327FEC00C6B65E /* FillTheTankTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FillTheTankTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		03C168D223327FEC00C6B65E /* FillTheTankTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillTheTankTests.swift; sourceTree = "<group>"; };
 		03C168D423327FEC00C6B65E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03C168E32333110200C6B65E /* FillTheTankTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillTheTankTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,7 +212,7 @@
 		03C168D123327FEC00C6B65E /* FillTheTankTests */ = {
 			isa = PBXGroup;
 			children = (
-				03C168D223327FEC00C6B65E /* FillTheTankTests.swift */,
+				03C168E32333110200C6B65E /* FillTheTankTests.swift */,
 				03C168D423327FEC00C6B65E /* Info.plist */,
 			);
 			path = FillTheTankTests;
@@ -457,7 +457,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03C168D323327FEC00C6B65E /* FillTheTankTests.swift in Sources */,
+				03C168E42333110200C6B65E /* FillTheTankTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
