@@ -48,6 +48,12 @@ class FillTheTankTests: XCTestCase {
         XCTAssert(manager.fProgress == 0.99)
     }
 
+    func testFillUpManagerUpdateProgress() {
+        var manager = FillUpManager(progressivelyFillUpWithDirection: .bottmUp, initialProgress: 0, fillUpColor: .green)
+        manager.update(fillUpProgress: 0.5)
+        XCTAssertTrue(manager.fProgress == 0.5)
+    }
+
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
