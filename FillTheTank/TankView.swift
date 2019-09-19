@@ -9,20 +9,21 @@
 import Foundation
 import UIKit
 
-
-
 open class Tank: UIView {
     
     private var label: UILabel?
     private var fillUpManager: FillUpManager
     private var fillView: FillsView!
-    private var dismissWhenTankIsfull: Bool = false
+    private var dismissWhenTankIsFull: Bool = false
     public init(manager: FillUpManager) {
         // Set up FillUpManager to provide animation info
         self.fillUpManager = manager
         super.init(frame: .zero)
-        
+        // Avoid automatically generated constraints
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.layoutIfNeeded()
     }
+    
 
     override open func layoutIfNeeded() {
         super.layoutIfNeeded()
@@ -59,7 +60,7 @@ open class Tank: UIView {
     }
 
     public func dismissWhenTankIsFull(_ dismiss: Bool) -> Tank {
-        self.dismissWhenTankIsfull = dismiss
+        self.dismissWhenTankIsFull = dismiss
         return self
     }
 
@@ -67,24 +68,27 @@ open class Tank: UIView {
         self.removeFromSuperview()
     }
 
-    public func filltheTank() {
+    public func filltheTank(completion: ((Bool)->Void)? = nil) {
+        //Update fillView's constraints to next target state
         fillView.updateConstraints(withManager: fillUpManager)
+        
         // If fillUpManager.fDuration < 0 means fType is .progressively,
-        // animation duration will be 0.3 for every progress update
+        // animation duration will be 0.2 for every progress update
         let duration = fillUpManager.fDuration < 0 ? 0.2 : fillUpManager.fDuration
+        
+        // Optional completion block with default nil value
+        // If completion is nil, set animation completion block
+        // equals to autoDismissBlock
         UIView.animate(withDuration: duration, delay: 0, options: [.curveEaseInOut], animations: { [unowned self] in
             self.layoutIfNeeded()
-            }, completion: { [unowned self] success in
-                if self.dismissWhenTankIsfull == true &&
-                    (self.fillUpManager.fProgress >= 1 || self.fillUpManager.fDuration != -1) {
-                    self.removeFromSuperview()
-                }
-        })
+        }, completion: completion == nil ?
+            autoDismissBlock : completion)
     }
     
 
     public func update(fillingProgress progress: Double) {
         fillUpManager.update(fillUpProgress: progress)
+        // Animate tank to fill up to new state
         filltheTank()
     }
     
@@ -96,4 +100,19 @@ open class Tank: UIView {
             self.layoutIfNeeded()
         }
     }
+
+    private lazy var autoDismissBlock: ((Bool)->Void)? = {
+        if self.dismissWhenTankIsFull == false {
+            // Noting to do when fill up animation completed
+            return nil
+        } else {
+            // Check if tank is full
+            // if YES, dismiss tank view
+            return { success in
+                if self.fillUpManager.fProgress >= 1 || self.fillUpManager.fDuration != -1 {
+                    self.dismiss()
+                }
+            }
+        }
+    }()
 }

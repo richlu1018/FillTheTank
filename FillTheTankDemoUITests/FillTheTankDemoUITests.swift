@@ -1,14 +1,14 @@
 //
-//  FillTheTankUITests.swift
-//  FillTheTankUITests
+//  FillTheTankDemoUITests.swift
+//  FillTheTankDemoUITests
 //
-//  Created by Richard Lu on 2019/9/17.
+//  Created by Richard Lu on 2019/9/18.
 //  Copyright © 2019 Richard Lu. All rights reserved.
 //
 
 import XCTest
 
-class FillTheTankUITests: XCTestCase {
+class FillTheTankDemoUITests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.

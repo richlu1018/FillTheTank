@@ -7,7 +7,45 @@
 		<key>FillTheTank.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>FillTheTankDemo.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>03C1682823325E8C00C6B65E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>03C1683B23325E8D00C6B65E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>03C1684623325E8D00C6B65E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>03C1687B23326E9700C6B65E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>03C16899233270ED00C6B65E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>03C168A1233270ED00C6B65E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

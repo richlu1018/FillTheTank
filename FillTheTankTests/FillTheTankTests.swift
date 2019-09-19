@@ -2,7 +2,7 @@
 //  FillTheTankTests.swift
 //  FillTheTankTests
 //
-//  Created by Richard Lu on 2019/9/17.
+//  Created by Richard Lu on 2019/9/18.
 //  Copyright © 2019 Richard Lu. All rights reserved.
 //
 
@@ -33,9 +33,9 @@ class FillTheTankTests: XCTestCase {
         XCTAssert(pManager.fDuration == -1)
         XCTAssert(pManager.fColor == .gray)
         XCTAssert(pManager.fProgress == 0.3)
-    
+        
     }
-
+    
     func testValidProgress() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -46,6 +46,12 @@ class FillTheTankTests: XCTestCase {
         XCTAssert(manager.fProgress == 1)
         manager.update(fillUpProgress: 0.99)
         XCTAssert(manager.fProgress == 0.99)
+    }
+
+    func testFillUpManagerUpdateProgress() {
+        var manager = FillUpManager(progressivelyFillUpWithDirection: .bottmUp, initialProgress: 0, fillUpColor: .green)
+        manager.update(fillUpProgress: 0.5)
+        XCTAssertTrue(manager.fProgress == 0.5)
     }
 
     func testPerformanceExample() {
