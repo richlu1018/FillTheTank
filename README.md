@@ -1,4 +1,6 @@
 # FillTheTank
+![image](https://j.gifs.com/r8B58E.gif)
+
 A customizable container view with options for filling up animation.
 
 [![Build status](https://travis-ci.com/richlu1018/FillTheTank.svg?branch=master)](https://travis-ci.com/richlu1018/FillTheTank)
@@ -21,32 +23,36 @@ First, import FillTheTank module
 ```swift
 import FillTheTank
 ```
-Next, create a FillUpManager first to determine some basic variants.
-There are 2 filling up animation options: 
- - Constantly - Fill up the tank(container view) linealy under specified duration
- - Progressively - Tank will animate to fill up to assigned ratio (0~1, 0: empty, 1: full)  
+Next, create a LevelManager first to determine some basic variants.
 
-Filling up animation option has to be determined while initiating FillUpManager.
+- directions: bottomUp⬆️, topDown⬇️, leftToRight➡️, rightToLeft⬅️ 
 
-For constantly fill up option, FillUpManager is initiated like below with designated fill up direction, countDownDuration and fillUpColor:
+- countDownDuration: level movement animation duration
+
+- level: value within 0~1, 0: empty 1: full
+
+- fillingsColor: color of containter fillings
+
 ```swift
-let manager = FillUpManager(constantlyFillUpWithDirection: .bottmUp, countDownDuration: 5, fillUpColor: .blue)
-```
-There are 4 fill up directions for now, bottomUp⬆️, topDown⬇️, leftToRight➡️, rightToLeft⬅️
-
-For progressively fill up options, initialization is same as above except we need to assign a initial progress ratio instead of a countDownDuration: 
-```swift
-let manager = FillUpManager(progressivelyFillUpWithDirection: .bottmUp, initialProgress: 0.0, fillUpColor: .gray)
+let manager = LevelManager(moveWithDirection: .leftToRight, duration: 2.0, initLevel: 0.0, fillingsColor: .orange)
 ```
 
 Now we can create our Tank view with the FillUpManager object and do some UI customization: 
 ```swift
-let tank = Tank(manager: manager)
-            .backgroundColor(.black)
-            .borderWidth(3.0)
-            .borderColor(.gray)
+// Title label text attributes
+let textAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 20)]
+
+// Initial tank view with LevelManager
+let tank = Tank(lvManager: manager)
             .cornerRadius(10.0)
+            .borderColor(.orange)
+            .borderWidth(3.0)
+            .backgroundColor(.white)
             .dismissWhenTankIsFull(true)
+            .titleLabel(attributedString: "pod \"FillTheTank\"",
+                       withAttributes: textAttributes)
 
 // Add tank into view hierarchy
 view.addSubView(tank)
@@ -60,24 +66,23 @@ NSLayoutConstraint.activate([tank.centerXAnchor.constraint(equalTo: view.centerX
 
 Let's fill up the tank:
 ```swift
-// For constantly fill up option without defining completion block
-// If dismissWhenThankIsFill is set to TRUE, 
+// If dismissWhenThankIsFill is set to TRUE and no custom completion block defined, 
 // tank view will be removed from superview when animation completed
 
-tank.filltheTank() 
+tank.fillUptheTank()
 ```
 Or you can also define your own completion block (By defining custom completion block, you have to manually remove tank view from superview when needed):
 ```swift
 
-tank.filltheTank { (_) in
+tank.fillUptheTank { (_) in
     print("Tank is full!")
     // Call dismiss() function to remove from superview
     tank.dismiss()
 }
 ```
-If your using progressively fill up option, the tank is fill up by updating the next fill ratio:
+Tank level change can also be done by updating the next level ratio:
 ```swift
-tank.update(fillingProgress: 0.8)
+tank.update(level: 0.8)
 ```
 
 # Credits
