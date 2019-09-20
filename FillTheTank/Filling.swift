@@ -1,5 +1,5 @@
 //
-//  FillsView.swift
+//  Filling.swift
 //  FillTheTank
 //
 //  Created by Richard Lu on 2019/9/17.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class FillsView: UIView {
+class Filling: UIView {
     var bottomConstraint: NSLayoutConstraint!
     var topConstraint: NSLayoutConstraint!
     var leftConstraint: NSLayoutConstraint!
@@ -17,35 +17,35 @@ class FillsView: UIView {
     var heightConstraint: NSLayoutConstraint!
     var widthContraint: NSLayoutConstraint!
     
-    func setUp(withManager mg: FillUpManager) {
-        self.backgroundColor = mg.fColor
+    func setUp(withManager mg: LevelManager) {
+        self.backgroundColor = mg.color
         self.setUpConstraints(withManager: mg)
     }
     
-    func setUpConstraints(withManager mg: FillUpManager) {
+    func setUpConstraints(withManager mg: LevelManager) {
         // Set up constraints based on fill up type
         
         guard let tank = self.superview as? Tank else { return }
-        switch mg.fType {
+        switch mg.movement {
         case .constantly:
-            self.setUpConstantFillUpConstraintsWith(tankView: tank, fDirection: mg.fDirection)
+            self.setUpConstantFillUpConstraintsWith(tankView: tank, fDirection: mg.direction)
         case .progressively:
-            self.setUpProgressFillUpConstraintsWith(tankView: tank, fDirection: mg.fDirection, initProgress: mg.fProgress)
+            self.setUpProgressFillUpConstraintsWith(tankView: tank, fDirection: mg.direction, initProgress: mg.progress)
         }
     }
 
-    func updateConstraints(withManager mg: FillUpManager) {
-        switch mg.fType {
+    func updateConstraints(withManager mg: LevelManager) {
+        switch mg.movement {
         case .constantly:
-            self.updateConstantFillUpStateConstraint(forDirection: mg.fDirection)
+            self.updateConstantFillUpStateConstraint(forDirection: mg.direction)
         case .progressively:
-            self.updateProgressFillUpStateConstraint(forDirection: mg.fDirection, progress: mg.fProgress)
+            self.updateProgressFillUpStateConstraint(forDirection: mg.direction, progress: mg.progress)
             self.updateConstraints()
         }
     }
     
     // private func
-    private func setUpConstantFillUpConstraintsWith(tankView v: Tank, fDirection: FillingDirection) {
+    private func setUpConstantFillUpConstraintsWith(tankView v: Tank, fDirection: LevelMovingDirection) {
         self.translatesAutoresizingMaskIntoConstraints = false
         switch fDirection {
         case .bottomUp:
@@ -102,7 +102,7 @@ class FillsView: UIView {
     }
     
     
-    private func updateConstantFillUpStateConstraint(forDirection d: FillingDirection) {
+    private func updateConstantFillUpStateConstraint(forDirection d: LevelMovingDirection) {
         switch d {
         case .bottomUp:
             heightConstraint.isActive = false
@@ -119,7 +119,7 @@ class FillsView: UIView {
         }
     }
     
-    private func setUpProgressFillUpConstraintsWith(tankView v: Tank, fDirection: FillingDirection, initProgress progress: Double) {
+    private func setUpProgressFillUpConstraintsWith(tankView v: Tank, fDirection: LevelMovingDirection, initProgress progress: Double) {
         self.translatesAutoresizingMaskIntoConstraints = false
         switch fDirection {
         case .bottomUp:
@@ -166,7 +166,7 @@ class FillsView: UIView {
         
     }
 
-    private func updateProgressFillUpStateConstraint(forDirection d: FillingDirection, progress: Double) {
+    private func updateProgressFillUpStateConstraint(forDirection d: LevelMovingDirection, progress: Double) {
         guard let v = self.superview else { return }
         switch d {
         case .bottomUp, .topDown:

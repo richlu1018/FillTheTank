@@ -18,9 +18,9 @@
 		03C168D523327FEC00C6B65E /* FillTheTank.h in Headers */ = {isa = PBXBuildFile; fileRef = 03C168C523327FEC00C6B65E /* FillTheTank.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		03C168D823327FEC00C6B65E /* FillTheTank.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03C168C323327FEC00C6B65E /* FillTheTank.framework */; };
 		03C168D923327FEC00C6B65E /* FillTheTank.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 03C168C323327FEC00C6B65E /* FillTheTank.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		03C168E023327FF600C6B65E /* FillsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345DD052330911F0079CC8C /* FillsView.swift */; };
-		03C168E123327FF600C6B65E /* TankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345DD03233080860079CC8C /* TankView.swift */; };
-		03C168E223327FF600C6B65E /* FillUpManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0385C83323308A28008099E1 /* FillUpManager.swift */; };
+		03C168E023327FF600C6B65E /* Filling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345DD052330911F0079CC8C /* Filling.swift */; };
+		03C168E123327FF600C6B65E /* Tank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345DD03233080860079CC8C /* Tank.swift */; };
+		03C168E223327FF600C6B65E /* LevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0385C83323308A28008099E1 /* LevelManager.swift */; };
 		03C168E42333110200C6B65E /* FillTheTankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C168E32333110200C6B65E /* FillTheTankTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,9 +77,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0345DD03233080860079CC8C /* TankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TankView.swift; sourceTree = "<group>"; };
-		0345DD052330911F0079CC8C /* FillsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillsView.swift; sourceTree = "<group>"; };
-		0385C83323308A28008099E1 /* FillUpManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillUpManager.swift; sourceTree = "<group>"; };
+		0345DD03233080860079CC8C /* Tank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tank.swift; sourceTree = "<group>"; };
+		0345DD052330911F0079CC8C /* Filling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filling.swift; sourceTree = "<group>"; };
+		0385C83323308A28008099E1 /* LevelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelManager.swift; sourceTree = "<group>"; };
 		03C1682923325E8C00C6B65E /* FillTheTankDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FillTheTankDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03C1682B23325E8C00C6B65E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03C1682D23325E8C00C6B65E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -200,9 +200,9 @@
 		03C168C423327FEC00C6B65E /* FillTheTank */ = {
 			isa = PBXGroup;
 			children = (
-				0345DD03233080860079CC8C /* TankView.swift */,
-				0385C83323308A28008099E1 /* FillUpManager.swift */,
-				0345DD052330911F0079CC8C /* FillsView.swift */,
+				0345DD03233080860079CC8C /* Tank.swift */,
+				0385C83323308A28008099E1 /* LevelManager.swift */,
+				0345DD052330911F0079CC8C /* Filling.swift */,
 				03C168C523327FEC00C6B65E /* FillTheTank.h */,
 				03C168C623327FEC00C6B65E /* Info.plist */,
 			);
@@ -447,9 +447,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03C168E123327FF600C6B65E /* TankView.swift in Sources */,
-				03C168E223327FF600C6B65E /* FillUpManager.swift in Sources */,
-				03C168E023327FF600C6B65E /* FillsView.swift in Sources */,
+				03C168E123327FF600C6B65E /* Tank.swift in Sources */,
+				03C168E223327FF600C6B65E /* LevelManager.swift in Sources */,
+				03C168E023327FF600C6B65E /* Filling.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

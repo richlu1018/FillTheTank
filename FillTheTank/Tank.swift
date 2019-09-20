@@ -1,5 +1,5 @@
 //
-//  TankView.swift
+//  Tank.swift
 //  FillTheTank
 //
 //  Created by Richard Lu on 2019/9/17.
@@ -12,12 +12,12 @@ import UIKit
 open class Tank: UIView {
     
     public var titleLabel: UILabel?
-    private var fillUpManager: FillUpManager
-    private var fillView: FillsView!
+    private var lvManager: LevelManager
+    private var fillView: Filling!
     private var dismissWhenTankIsFull: Bool = false
-    public init(manager: FillUpManager) {
-        // Set up FillUpManager to provide animation info
-        self.fillUpManager = manager
+    public init(lvManager: LevelManager) {
+        // Set up lvManager to provide animation info
+        self.lvManager = lvManager
         super.init(frame: .zero)
         // Avoid automatically generated constraints
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -29,7 +29,7 @@ open class Tank: UIView {
         super.layoutIfNeeded()
         //Init fills view for filling up animation
         if fillView == nil {
-            self.initFillsView()
+            self.initFillView()
             self.clipsToBounds = true
         }
     }
@@ -80,11 +80,11 @@ open class Tank: UIView {
 
     public func filltheTank(completion: ((Bool)->Void)? = nil) {
         //Update fillView's constraints to next target state
-        fillView.updateConstraints(withManager: fillUpManager)
+        fillView.updateConstraints(withManager: lvManager)
         
-        // If fillUpManager.fDuration < 0 means fType is .progressively,
+        // If lvManager.fDuration < 0 means fType is .progressively,
         // animation duration will be 0.2 for every progress update
-        let duration = fillUpManager.fDuration < 0 ? 0.2 : fillUpManager.fDuration
+        let duration = lvManager.duration < 0 ? 0.2 : lvManager.duration
         
         // Optional completion block with default nil value
         // If completion is nil, set animation completion block
@@ -94,19 +94,36 @@ open class Tank: UIView {
         }, completion: completion == nil ?
             autoDismissBlock : completion)
     }
+
+    public func drainTheTank(completion: ((Bool)->Void)? = nil) {
+        //Update fillView's constraints to next target state
+        fillView.updateConstraints(withManager: lvManager)
+        
+        // If lvManager.fDuration < 0 means fType is .progressively,
+        // animation duration will be 0.2 for every progress update
+        let duration = lvManager.duration < 0 ? 0.2 : lvManager.duration
+        
+        // Optional completion block with default nil value
+        // If completion is nil, set animation completion block
+        // equals to autoDismissBlock
+        UIView.animate(withDuration: duration, delay: 0, options: [.curveEaseInOut], animations: { [unowned self] in
+            self.layoutIfNeeded()
+            }, completion: completion == nil ?
+                autoDismissBlock : completion)
+    }
     
 
     public func update(fillingProgress progress: Double) {
-        fillUpManager.update(fillUpProgress: progress)
+        lvManager.update(levelProgress: progress)
         // Animate tank to fill up to new state
         filltheTank()
     }
     
-    private func initFillsView() {
-        self.fillView = FillsView(frame: .zero)
+    private func initFillView() {
+        self.fillView = Filling(frame: .zero)
         if let v = self.fillView {
             self.addSubview(v)
-            v.setUp(withManager: fillUpManager)
+            v.setUp(withManager: lvManager)
             self.layoutIfNeeded()
         }
     }
@@ -130,7 +147,7 @@ open class Tank: UIView {
             // Check if tank is full
             // if YES, dismiss tank view
             return { success in
-                if self.fillUpManager.fProgress >= 1 || self.fillUpManager.fDuration != -1 {
+                if self.lvManager.progress >= 1 || self.lvManager.duration != -1 {
                     self.dismiss()
                 }
             }
