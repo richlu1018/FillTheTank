@@ -6,11 +6,15 @@
 	<dict>
 		<key>FillTheTank.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
 		<key>FillTheTankDemo.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
@@ -43,6 +47,16 @@
 			<true/>
 		</dict>
 		<key>03C168A1233270ED00C6B65E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>03C168C223327FEC00C6B65E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>03C168CA23327FEC00C6B65E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
