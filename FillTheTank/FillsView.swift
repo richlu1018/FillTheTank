@@ -48,7 +48,7 @@ class FillsView: UIView {
     private func setUpConstantFillUpConstraintsWith(tankView v: Tank, fDirection: FillingDirection) {
         self.translatesAutoresizingMaskIntoConstraints = false
         switch fDirection {
-        case .bottmUp:
+        case .bottomUp:
             bottomConstraint = self.bottomAnchor.constraint(equalTo: v.bottomAnchor, constant: 0)
             leftConstraint = self.leftAnchor.constraint(equalTo: v.leftAnchor, constant: 0)
             rightConstraint = self.rightAnchor.constraint(equalTo: v.rightAnchor, constant: 0)
@@ -104,7 +104,7 @@ class FillsView: UIView {
     
     private func updateConstantFillUpStateConstraint(forDirection d: FillingDirection) {
         switch d {
-        case .bottmUp:
+        case .bottomUp:
             heightConstraint.isActive = false
             topConstraint.isActive = true
         case .topDown:
@@ -122,7 +122,7 @@ class FillsView: UIView {
     private func setUpProgressFillUpConstraintsWith(tankView v: Tank, fDirection: FillingDirection, initProgress progress: Double) {
         self.translatesAutoresizingMaskIntoConstraints = false
         switch fDirection {
-        case .bottmUp:
+        case .bottomUp:
             bottomConstraint = self.bottomAnchor.constraint(equalTo: v.bottomAnchor, constant: 0)
             leftConstraint = self.leftAnchor.constraint(equalTo: v.leftAnchor, constant: 0)
             rightConstraint = self.rightAnchor.constraint(equalTo: v.rightAnchor, constant: 0)
@@ -169,7 +169,7 @@ class FillsView: UIView {
     private func updateProgressFillUpStateConstraint(forDirection d: FillingDirection, progress: Double) {
         guard let v = self.superview else { return }
         switch d {
-        case .bottmUp, .topDown:
+        case .bottomUp, .topDown:
             heightConstraint.isActive = false
             heightConstraint = self.heightAnchor.constraint(equalToConstant: v.frame.height * CGFloat(progress))
             heightConstraint.isActive = true
