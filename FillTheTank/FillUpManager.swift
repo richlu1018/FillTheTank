@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public enum FillingDirection {
-    case bottmUp
+    case bottomUp
     case topDown
     case leftToRight
     case rightToLeft
