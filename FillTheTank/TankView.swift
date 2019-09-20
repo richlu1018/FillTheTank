@@ -11,7 +11,7 @@ import UIKit
 
 open class Tank: UIView {
     
-    private var label: UILabel?
+    public var titleLabel: UILabel?
     private var fillUpManager: FillUpManager
     private var fillView: FillsView!
     private var dismissWhenTankIsFull: Bool = false
@@ -59,6 +59,16 @@ open class Tank: UIView {
         return self
     }
 
+    public func titleLabel(attributedString t: String, withAttributes attr: [NSAttributedString.Key: Any]) -> Tank {
+        if titleLabel == nil {
+            self.initTitleLabel()
+        }
+        let attrText = NSAttributedString(string: t, attributes: attr)
+        self.titleLabel?.attributedText = attrText
+        self.titleLabel?.sizeToFit()
+        return self
+    }
+
     public func dismissWhenTankIsFull(_ dismiss: Bool) -> Tank {
         self.dismissWhenTankIsFull = dismiss
         return self
@@ -99,6 +109,17 @@ open class Tank: UIView {
             v.setUp(withManager: fillUpManager)
             self.layoutIfNeeded()
         }
+    }
+
+    private func initTitleLabel() {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(lbl)
+        NSLayoutConstraint.activate([
+            lbl.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            lbl.centerYAnchor.constraint(equalTo: self.centerYAnchor)])
+        self.titleLabel = lbl
+        
     }
 
     private lazy var autoDismissBlock: ((Bool)->Void)? = {

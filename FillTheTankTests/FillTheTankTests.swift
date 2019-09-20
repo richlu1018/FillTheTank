@@ -54,6 +54,13 @@ class FillTheTankTests: XCTestCase {
         XCTAssertTrue(manager.fProgress == 0.5)
     }
 
+    func textTankTitleLabelSetUp() {
+        let manager = FillUpManager(progressivelyFillUpWithDirection: .bottmUp, initialProgress: 0, fillUpColor: .green)
+        let tank = Tank(manager: manager)
+            .titleLabel(attributedString: "Test", withAttributes: [.font: UIFont.systemFont(ofSize: 12)])
+        XCTAssertTrue(tank.titleLabel != nil)
+    }
+
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
