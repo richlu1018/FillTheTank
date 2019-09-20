@@ -11,21 +11,38 @@ import FillTheTank
 
 class ViewController: UIViewController {
 
-    var colors: [UIColor] = []
-    var directions: [LevelMovingDirection] = []
+    
     var tanks: [Tank?] = []
     var progressBar: Tank!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        view.backgroundColor = .black
         addProgressBarStyleTank()
+        addFullScreenTanks()
+        
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        startFullScreeIntro()
+    }
+
+    private func addFullScreenTanks() {
         let pink = UIColor(red: 255.0/255.0, green: 105.0/255.0, blue: 180.0/255.0, alpha: 1.0)
-        colors = [.white, pink, .purple, .orange, .gray]
-        directions = [.rightToLeft, .bottomUp,.leftToRight, .topDown, .rightToLeft]
+        var colors: [UIColor] = [pink, .black, .blue, .lightGray, .orange]
+        var directions: [LevelMovingDirection] = [.leftToRight, .topDown, .rightToLeft, .bottomUp, .leftToRight]
+        var titles: [String] = ["richlu1018", "By", "Tank", "The", "Fill"]
         for i in 0..<colors.count {
-            let manager = LevelManager(moveWithDirection: directions[i], duration: 0.5, initLevel: 0.0, fillingsColor: colors[i])
+            let manager = LevelManager(moveWithDirection: directions[i],
+                                       duration: i == 0 ? 1.5 : 0.5,
+                                       initLevel: 0.0,
+                                       fillingsColor: colors[i])
             let tank = Tank(lvManager: manager)
                 .backgroundColor(i+1 < colors.count ? colors[i+1] : .white)
+                .titleLabel(attributedString: titles[i],
+                            withAttributes: [.font: UIFont.boldSystemFont(ofSize: 38),
+                                             .foregroundColor: i == 0 ? UIColor.black : UIColor.white])
                 .dismissWhenTankIsFull(true)
             tanks.append(tank)
             view.addSubview(tank)
@@ -34,23 +51,28 @@ class ViewController: UIViewController {
                                          tank.widthAnchor.constraint(equalTo:view.widthAnchor),
                                          tank.heightAnchor.constraint(equalTo: view.heightAnchor)])
         }
-        
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    private func startFullScreeIntro() {
         var i: Int = tanks.count {
             didSet {
                 guard i >= 0 else {
                     progressBar.fillUptheTank { [unowned self] (_) in
-                        self.progressBar.drainTheTank()
-                        self.startAnimationGroup(with: self.addPianoBarViews())
+                        self.startPianoBarFillUpAnimationGroup(with: self.addPianoBarViews())
                     }
                     return
                 }
                 tanks[i]?.fillUptheTank(completion: { [unowned self] (_) in
-                    self.tanks[i]?.dismiss()
-                    i -= 1
+                    if i == 0 {
+                        self.tanks[i]?.drainTheTank(completion: { (_) in
+                            self.tanks[i]?.dismiss()
+                            i -= 1
+                        })
+                    } else {
+                        self.tanks[i]?.dismiss()
+                        i -= 1
+                    }
+                    
                 })
             }
         }
@@ -68,25 +90,24 @@ class ViewController: UIViewController {
                         .borderColor(.orange)
                         .borderWidth(3.0)
                         .backgroundColor(.white)
-                        .titleLabel(attributedString: "FillTheTank",
+                        .titleLabel(attributedString: "pod \"FillTheTank\"",
                                     withAttributes: textAttributes)
 
         view.addSubview(progressBar)
         NSLayoutConstraint.activate([
             progressBar.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             progressBar.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            progressBar.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            progressBar.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             progressBar.heightAnchor.constraint(equalToConstant: 50)])
-        
         
     }
     
     private func addPianoBarViews() -> [Tank] {
-        let barCount = 20
+        let barCount = 21
         var bars:[Tank] = []
         for i in 0..<barCount {
             let direction: LevelMovingDirection = i % 2 == 0 ? .bottomUp: .topDown
-            let fColor: UIColor = i % 2 == 0 ? .black : .purple
+            let fColor: UIColor = i % 2 == 0 ? .purple : .white
             let manager = LevelManager(moveWithDirection: direction, duration: 2.0, initLevel: 0.0, fillingsColor: fColor)
             let bar = Tank(lvManager: manager)
                     .backgroundColor(.clear)
@@ -103,16 +124,21 @@ class ViewController: UIViewController {
         return bars
     }
 
-    private func startAnimationGroup(with tanks: [Tank]) {
+    private func startPianoBarFillUpAnimationGroup(with tanks: [Tank]) {
         UIView.animateKeyframes(withDuration: 1.0, delay: 0, options: .calculationModeLinear, animations: {
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1.0, animations: {
-                tanks.forEach({$0.fillUptheTank(completion: { (_) in
-                    UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: .calculationModeLinear, animations: {
-                        UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5, animations: {
-                            tanks.forEach({$0.drainTheTank()})
-                        })
-                    }, completion: nil)
+                tanks.forEach({$0.fillUptheTank(completion: { [unowned self] (_) in
+                    self.progressBar.dismiss()
+                    self.startPianoBarDrainAnimationGroup(with: tanks)
                 })})
+            })
+        }, completion: nil)
+    }
+
+    private func startPianoBarDrainAnimationGroup(with tanks: [Tank]) {
+        UIView.animateKeyframes(withDuration: 1.0, delay: 0, options: .calculationModeLinear, animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1.0, animations: {
+                tanks.forEach({$0.drainTheTank()})
             })
         }, completion: nil)
     }

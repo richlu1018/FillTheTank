@@ -20,42 +20,27 @@ class FillTheTankTests: XCTestCase {
     }
 
     func testLevelManagerInit() {
-        let cManager = LevelManager(constantlyMoveWithDirection: .topDown, countDownDuration: 3.0, fillingsColor: .gray)
-        XCTAssert(cManager.movement == .constantly)
+        let cManager = LevelManager(moveWithDirection: .topDown, duration: 3.0, initLevel: 0.0, fillingsColor: .gray)
         XCTAssert(cManager.direction == .topDown)
         XCTAssert(cManager.duration == 3.0)
         XCTAssert(cManager.color == .gray)
-        XCTAssert(cManager.progress == -1)
-        
-        let pManager = LevelManager(progressivelyMoveWithDirection: .topDown, initialProgress: 0.3, fillingsColor: .gray)
-        XCTAssert(pManager.movement == .progressively)
-        XCTAssert(pManager.direction == .topDown)
-        XCTAssert(pManager.duration == -1)
-        XCTAssert(pManager.color == .gray)
-        XCTAssert(pManager.progress == 0.3)
-        
+        XCTAssert(cManager.level == 0.0)
     }
     
     func testValidProgress() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        var manager = LevelManager(progressivelyMoveWithDirection: .bottomUp, initialProgress: 0, fillingsColor: .green)
-        manager.update(levelProgress: -1)
-        XCTAssert(manager.progress == 0)
-        manager.update(levelProgress: 2)
-        XCTAssert(manager.progress == 1)
-        manager.update(levelProgress: 0.99)
-        XCTAssert(manager.progress == 0.99)
-    }
-
-    func testLevelManagerUpdateProgress() {
-        var manager = LevelManager(progressivelyMoveWithDirection: .bottomUp, initialProgress: 0, fillingsColor: .green)
-        manager.update(levelProgress: 0.5)
-        XCTAssertTrue(manager.progress == 0.5)
+        var manager = LevelManager(moveWithDirection: .bottomUp, duration: 0.1, initLevel: 0.0, fillingsColor: .green)
+        manager.update(level: -1)
+        XCTAssert(manager.level == 0)
+        manager.update(level: 2)
+        XCTAssert(manager.level == 1)
+        manager.update(level: 0.99)
+        XCTAssert(manager.level == 0.99)
     }
 
     func textTankTitleLabelSetUp() {
-        let manager = LevelManager(progressivelyMoveWithDirection: .bottomUp, initialProgress: 0, fillingsColor: .green)
+        let manager = LevelManager(moveWithDirection: .bottomUp, duration: 1.0, initLevel: 0, fillingsColor: .green)
         let tank = Tank(lvManager: manager)
             .titleLabel(attributedString: "Test", withAttributes: [.font: UIFont.systemFont(ofSize: 12)])
         XCTAssertTrue(tank.titleLabel != nil)
