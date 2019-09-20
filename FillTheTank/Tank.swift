@@ -12,9 +12,10 @@ import UIKit
 open class Tank: UIView {
     
     public var titleLabel: UILabel?
-    private var lvManager: LevelManager
+    private(set) var lvManager: LevelManager
     private var fillView: Filling!
     private var dismissWhenTankIsFull: Bool = false
+
     public init(lvManager: LevelManager) {
         // Set up lvManager to provide animation info
         self.lvManager = lvManager
@@ -24,6 +25,10 @@ open class Tank: UIView {
         self.layoutIfNeeded()
     }
     
+    public func updateLvManager(_ lm: LevelManager) -> Tank {
+        lvManager = lm
+        return self
+    }
 
     override open func layoutIfNeeded() {
         super.layoutIfNeeded()
@@ -78,45 +83,25 @@ open class Tank: UIView {
         self.removeFromSuperview()
     }
 
-    public func filltheTank(completion: ((Bool)->Void)? = nil) {
-        //Update fillView's constraints to next target state
-        fillView.updateConstraints(withManager: lvManager)
-        
-        // If lvManager.fDuration < 0 means fType is .progressively,
-        // animation duration will be 0.2 for every progress update
-        let duration = lvManager.duration < 0 ? 0.2 : lvManager.duration
-        
-        // Optional completion block with default nil value
-        // If completion is nil, set animation completion block
-        // equals to autoDismissBlock
-        UIView.animate(withDuration: duration, delay: 0, options: [.curveEaseInOut], animations: { [unowned self] in
-            self.layoutIfNeeded()
-        }, completion: completion == nil ?
-            autoDismissBlock : completion)
+    public func fillUptheTank(completion: ((Bool)->Void)? = nil) {
+        // Drain the tank to empty state
+        lvManager.update(level: 1.0)
+        // Animate tank to fill up to new state
+        updateLevelProgress(withDuration: lvManager.duration, completion: completion)
     }
 
     public func drainTheTank(completion: ((Bool)->Void)? = nil) {
-        //Update fillView's constraints to next target state
-        fillView.updateConstraints(withManager: lvManager)
-        
-        // If lvManager.fDuration < 0 means fType is .progressively,
-        // animation duration will be 0.2 for every progress update
-        let duration = lvManager.duration < 0 ? 0.2 : lvManager.duration
-        
-        // Optional completion block with default nil value
-        // If completion is nil, set animation completion block
-        // equals to autoDismissBlock
-        UIView.animate(withDuration: duration, delay: 0, options: [.curveEaseInOut], animations: { [unowned self] in
-            self.layoutIfNeeded()
-            }, completion: completion == nil ?
-                autoDismissBlock : completion)
+        // Drain the tank to empty state
+        lvManager.update(level: 0.0)
+        // Animate tank to fill up to new state
+        updateLevelProgress(withDuration: lvManager.duration, completion: completion)
     }
     
 
-    public func update(fillingProgress progress: Double) {
-        lvManager.update(levelProgress: progress)
+    public func update(fillingProgress p: Double, completion: ((Bool)->Void)? = nil) {
+        lvManager.update(level: p)
         // Animate tank to fill up to new state
-        filltheTank()
+        updateLevelProgress(withDuration: lvManager.duration, completion: completion)
     }
     
     private func initFillView() {
@@ -138,6 +123,18 @@ open class Tank: UIView {
         self.titleLabel = lbl
         
     }
+    
+    private func updateLevelProgress(withDuration d: Double, completion: ((Bool)->Void)? = nil) {
+        fillView.updateConstraints(withManager: lvManager)
+        
+        // Optional completion block with default nil value
+        // If completion is nil, set animation completion block
+        // equals to autoDismissBlock
+        UIView.animate(withDuration: d, delay: 0, options: [.curveLinear], animations: { [unowned self] in
+            self.layoutIfNeeded()
+            }, completion: completion == nil ?
+                autoDismissBlock : completion)
+    }
 
     private lazy var autoDismissBlock: ((Bool)->Void)? = {
         if self.dismissWhenTankIsFull == false {
@@ -147,7 +144,7 @@ open class Tank: UIView {
             // Check if tank is full
             // if YES, dismiss tank view
             return { success in
-                if self.lvManager.progress >= 1 || self.lvManager.duration != -1 {
+                if self.lvManager.level >= 1 || self.lvManager.duration != -1 {
                     self.dismiss()
                 }
             }

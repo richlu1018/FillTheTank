@@ -26,107 +26,23 @@ class Filling: UIView {
         // Set up constraints based on fill up type
         
         guard let tank = self.superview as? Tank else { return }
-        switch mg.movement {
-        case .constantly:
-            self.setUpConstantFillUpConstraintsWith(tankView: tank, fDirection: mg.direction)
-        case .progressively:
-            self.setUpProgressFillUpConstraintsWith(tankView: tank, fDirection: mg.direction, initProgress: mg.progress)
-        }
+        self.setUpConstraintsWith(tankView: tank, fDirection: mg.direction, initLevel: mg.level)
     }
 
     func updateConstraints(withManager mg: LevelManager) {
-        switch mg.movement {
-        case .constantly:
-            self.updateConstantFillUpStateConstraint(forDirection: mg.direction)
-        case .progressively:
-            self.updateProgressFillUpStateConstraint(forDirection: mg.direction, progress: mg.progress)
-            self.updateConstraints()
-        }
+        self.updateLevelStateConstraint(forDirection: mg.direction, level: mg.level)
+        self.updateConstraints()
     }
+
     
-    // private func
-    private func setUpConstantFillUpConstraintsWith(tankView v: Tank, fDirection: LevelMovingDirection) {
+    private func setUpConstraintsWith(tankView v: Tank, fDirection: LevelMovingDirection, initLevel lv: Double) {
         self.translatesAutoresizingMaskIntoConstraints = false
         switch fDirection {
         case .bottomUp:
             bottomConstraint = self.bottomAnchor.constraint(equalTo: v.bottomAnchor, constant: 0)
             leftConstraint = self.leftAnchor.constraint(equalTo: v.leftAnchor, constant: 0)
             rightConstraint = self.rightAnchor.constraint(equalTo: v.rightAnchor, constant: 0)
-            topConstraint = self.topAnchor.constraint(equalTo: v.topAnchor, constant: 0)
-            heightConstraint = self.heightAnchor.constraint(equalToConstant: 0)
-            
-            // topConstraint is for end state of bottomUp filling up
-            // so it won't be activate in init set up
-            NSLayoutConstraint.activate([bottomConstraint,
-                                         leftConstraint,
-                                         rightConstraint,
-                                         heightConstraint])
-        case .topDown:
-            bottomConstraint = self.bottomAnchor.constraint(equalTo: v.bottomAnchor, constant: 0)
-            leftConstraint = self.leftAnchor.constraint(equalTo: v.leftAnchor, constant: 0)
-            rightConstraint = self.rightAnchor.constraint(equalTo: v.rightAnchor, constant: 0)
-            topConstraint = self.topAnchor.constraint(equalTo: v.topAnchor, constant: 0)
-            heightConstraint = self.heightAnchor.constraint(equalToConstant: 0)
-            // bottomConstraint is for end state of topDown filling up
-            // so it won't be activate in init set up
-            NSLayoutConstraint.activate([topConstraint,
-                                         leftConstraint,
-                                         rightConstraint,
-                                         heightConstraint])
-        case .leftToRight:
-            bottomConstraint = self.bottomAnchor.constraint(equalTo: v.bottomAnchor, constant: 0)
-            leftConstraint = self.leftAnchor.constraint(equalTo: v.leftAnchor, constant: 0)
-            rightConstraint = self.rightAnchor.constraint(equalTo: v.rightAnchor, constant: 0)
-            topConstraint = self.topAnchor.constraint(equalTo: v.topAnchor, constant: 0)
-            widthContraint = self.widthAnchor.constraint(equalToConstant: 0)
-            // rightConstraint is for end state of leftToRight filling up
-            // so it won't be activate in init set up
-            NSLayoutConstraint.activate([topConstraint,
-                                         bottomConstraint,
-                                         leftConstraint,
-                                         widthContraint])
-        case .rightToLeft:
-            bottomConstraint = self.bottomAnchor.constraint(equalTo: v.bottomAnchor, constant: 0)
-            leftConstraint = self.leftAnchor.constraint(equalTo: v.leftAnchor, constant: 0)
-            rightConstraint = self.rightAnchor.constraint(equalTo: v.rightAnchor, constant: 0)
-            topConstraint = self.topAnchor.constraint(equalTo: v.topAnchor, constant: 0)
-            widthContraint = self.widthAnchor.constraint(equalToConstant: 0)
-            // rightConstraint is for end state of rightToLeft filling up
-            // so it won't be activate in init set up
-            NSLayoutConstraint.activate([topConstraint,
-                                         bottomConstraint,
-                                         leftConstraint,
-                                         widthContraint])
-        }
-        
-    }
-    
-    
-    private func updateConstantFillUpStateConstraint(forDirection d: LevelMovingDirection) {
-        switch d {
-        case .bottomUp:
-            heightConstraint.isActive = false
-            topConstraint.isActive = true
-        case .topDown:
-            heightConstraint.isActive = false
-            bottomConstraint.isActive = true
-        case .leftToRight:
-            widthContraint.isActive = false
-            rightConstraint.isActive = true
-        case .rightToLeft:
-            widthContraint.isActive = false
-            rightConstraint.isActive = true
-        }
-    }
-    
-    private func setUpProgressFillUpConstraintsWith(tankView v: Tank, fDirection: LevelMovingDirection, initProgress progress: Double) {
-        self.translatesAutoresizingMaskIntoConstraints = false
-        switch fDirection {
-        case .bottomUp:
-            bottomConstraint = self.bottomAnchor.constraint(equalTo: v.bottomAnchor, constant: 0)
-            leftConstraint = self.leftAnchor.constraint(equalTo: v.leftAnchor, constant: 0)
-            rightConstraint = self.rightAnchor.constraint(equalTo: v.rightAnchor, constant: 0)
-            heightConstraint = self.heightAnchor.constraint(equalToConstant: v.frame.height * CGFloat(progress))
+            heightConstraint = self.heightAnchor.constraint(equalToConstant: v.frame.height * CGFloat(lv))
 
             NSLayoutConstraint.activate([bottomConstraint,
                                          leftConstraint,
@@ -136,7 +52,7 @@ class Filling: UIView {
             leftConstraint = self.leftAnchor.constraint(equalTo: v.leftAnchor, constant: 0)
             rightConstraint = self.rightAnchor.constraint(equalTo: v.rightAnchor, constant: 0)
             topConstraint = self.topAnchor.constraint(equalTo: v.topAnchor, constant: 0)
-            heightConstraint = self.heightAnchor.constraint(equalToConstant: v.frame.height * CGFloat(progress))
+            heightConstraint = self.heightAnchor.constraint(equalToConstant: v.frame.height * CGFloat(lv))
             
             NSLayoutConstraint.activate([topConstraint,
                                          leftConstraint,
@@ -146,7 +62,7 @@ class Filling: UIView {
             bottomConstraint = self.bottomAnchor.constraint(equalTo: v.bottomAnchor, constant: 0)
             leftConstraint = self.leftAnchor.constraint(equalTo: v.leftAnchor, constant: 0)
             topConstraint = self.topAnchor.constraint(equalTo: v.topAnchor, constant: 0)
-            widthContraint = self.widthAnchor.constraint(equalToConstant: v.frame.width * CGFloat(progress))
+            widthContraint = self.widthAnchor.constraint(equalToConstant: v.frame.width * CGFloat(lv))
            
             NSLayoutConstraint.activate([topConstraint,
                                          bottomConstraint,
@@ -156,7 +72,7 @@ class Filling: UIView {
             bottomConstraint = self.bottomAnchor.constraint(equalTo: v.bottomAnchor, constant: 0)
             rightConstraint = self.rightAnchor.constraint(equalTo: v.rightAnchor, constant: 0)
             topConstraint = self.topAnchor.constraint(equalTo: v.topAnchor, constant: 0)
-            widthContraint = self.widthAnchor.constraint(equalToConstant: v.frame.width * CGFloat(progress))
+            widthContraint = self.widthAnchor.constraint(equalToConstant: v.frame.width * CGFloat(lv))
 
             NSLayoutConstraint.activate([topConstraint,
                                          bottomConstraint,
@@ -166,16 +82,16 @@ class Filling: UIView {
         
     }
 
-    private func updateProgressFillUpStateConstraint(forDirection d: LevelMovingDirection, progress: Double) {
+    private func updateLevelStateConstraint(forDirection d: LevelMovingDirection, level: Double) {
         guard let v = self.superview else { return }
         switch d {
         case .bottomUp, .topDown:
             heightConstraint.isActive = false
-            heightConstraint = self.heightAnchor.constraint(equalToConstant: v.frame.height * CGFloat(progress))
+            heightConstraint = self.heightAnchor.constraint(equalToConstant: v.frame.height * CGFloat(level))
             heightConstraint.isActive = true
         case .leftToRight, .rightToLeft:
             widthContraint.isActive = false
-            widthContraint = self.widthAnchor.constraint(equalToConstant: v.frame.width * CGFloat(progress))
+            widthContraint = self.widthAnchor.constraint(equalToConstant: v.frame.width * CGFloat(level))
             widthContraint.isActive = true
         }
     }
