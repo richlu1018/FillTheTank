@@ -21,10 +21,10 @@ class FillTheTankTests: XCTestCase {
 
     func testLevelManagerInit() {
         let cManager = LevelManager(moveWithDirection: .topDown, duration: 3.0, initLevel: 0.0, fillingsColor: .gray)
-        XCTAssert(cManager.direction == .topDown)
+        XCTAssert(cManager.direction.value == .topDown)
         XCTAssert(cManager.duration == 3.0)
-        XCTAssert(cManager.color == .gray)
-        XCTAssert(cManager.level == 0.0)
+        XCTAssert(cManager.color.value == .gray)
+        XCTAssert(cManager.level.value == 0.0)
     }
     
     func testValidProgress() {
@@ -32,11 +32,11 @@ class FillTheTankTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         var manager = LevelManager(moveWithDirection: .bottomUp, duration: 0.1, initLevel: 0.0, fillingsColor: .green)
         manager.update(level: -1)
-        XCTAssert(manager.level == 0)
+        XCTAssert(manager.level.value == 0)
         manager.update(level: 2)
-        XCTAssert(manager.level == 1)
+        XCTAssert(manager.level.value == 1)
         manager.update(level: 0.99)
-        XCTAssert(manager.level == 0.99)
+        XCTAssert(manager.level.value == 0.99)
     }
 
     func textTankTitleLabelSetUp() {
