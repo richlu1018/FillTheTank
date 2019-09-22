@@ -10,30 +10,19 @@ import Foundation
 import UIKit
 
 class Filling: UIView {
-    var bottomConstraint: NSLayoutConstraint!
-    var topConstraint: NSLayoutConstraint!
-    var leftConstraint: NSLayoutConstraint!
-    var rightConstraint: NSLayoutConstraint!
-    var heightConstraint: NSLayoutConstraint!
-    var widthContraint: NSLayoutConstraint!
+    private var bottomConstraint: NSLayoutConstraint!
+    private var topConstraint: NSLayoutConstraint!
+    private var leftConstraint: NSLayoutConstraint!
+    private var rightConstraint: NSLayoutConstraint!
+    private var heightConstraint: NSLayoutConstraint!
+    private var widthContraint: NSLayoutConstraint!
     
     func setUp(withManager mg: LevelManager) {
-        self.backgroundColor = mg.color
-        self.setUpConstraints(withManager: mg)
-    }
-    
-    func setUpConstraints(withManager mg: LevelManager) {
+        self.backgroundColor = mg.color.value
         // Set up constraints based on fill up type
-        
         guard let tank = self.superview as? Tank else { return }
-        self.setUpConstraintsWith(tankView: tank, fDirection: mg.direction, initLevel: mg.level)
+        self.setUpConstraintsWith(tankView: tank, fDirection: mg.direction.value, initLevel: mg.level.value)
     }
-
-    func updateConstraints(withManager mg: LevelManager) {
-        self.updateLevelStateConstraint(forDirection: mg.direction, level: mg.level)
-        self.updateConstraints()
-    }
-
     
     private func setUpConstraintsWith(tankView v: Tank, fDirection: LevelMovingDirection, initLevel lv: Double) {
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +32,6 @@ class Filling: UIView {
             leftConstraint = self.leftAnchor.constraint(equalTo: v.leftAnchor, constant: 0)
             rightConstraint = self.rightAnchor.constraint(equalTo: v.rightAnchor, constant: 0)
             heightConstraint = self.heightAnchor.constraint(equalToConstant: v.frame.height * CGFloat(lv))
-
             NSLayoutConstraint.activate([bottomConstraint,
                                          leftConstraint,
                                          rightConstraint,
@@ -82,9 +70,11 @@ class Filling: UIView {
         
     }
 
-    private func updateLevelStateConstraint(forDirection d: LevelMovingDirection, level: Double) {
-        guard let v = self.superview else { return }
-        switch d {
+    public func updateLevelStateConstraint() {
+        guard let v = self.superview as? Tank else { return }
+        let level = v.lvManager.level.value
+        let direction = v.lvManager.direction.value
+        switch direction {
         case .bottomUp, .topDown:
             heightConstraint.isActive = false
             heightConstraint = self.heightAnchor.constraint(equalToConstant: v.frame.height * CGFloat(level))
@@ -94,5 +84,34 @@ class Filling: UIView {
             widthContraint = self.widthAnchor.constraint(equalToConstant: v.frame.width * CGFloat(level))
             widthContraint.isActive = true
         }
+        self.updateConstraints()
+    }
+    
+    //
+    public func updateConstraints(forDirectionChangefrom old: LevelMovingDirection ) {
+        guard let v = self.superview as? Tank else { return }
+        switch old {
+        case .bottomUp:
+            NSLayoutConstraint.deactivate([bottomConstraint,
+                                    leftConstraint,
+                                    rightConstraint,
+                                    heightConstraint])
+        case .topDown:
+        NSLayoutConstraint.deactivate([topConstraint,
+                                leftConstraint,
+                                rightConstraint,
+                                heightConstraint])
+        case .leftToRight:
+            NSLayoutConstraint.deactivate([topConstraint,
+                                    bottomConstraint,
+                                    leftConstraint,
+                                    widthContraint])
+        case .rightToLeft:
+            NSLayoutConstraint.deactivate([topConstraint,
+                                    bottomConstraint,
+                                    rightConstraint,
+                                    widthContraint])
+        }
+        self.setUpConstraintsWith(tankView: v, fDirection: v.lvManager.direction.value, initLevel: v.lvManager.level.value)
     }
 }

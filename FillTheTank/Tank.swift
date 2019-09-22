@@ -8,14 +8,17 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxRelay
 
 open class Tank: UIView {
     
     public var titleLabel: UILabel?
-    private(set) var lvManager: LevelManager
+    public var lvManager: LevelManager
     private var fillView: Filling!
     private var dismissWhenTankIsFull: Bool = false
-
+    private let disposeBag = DisposeBag()
+    
     public init(lvManager: LevelManager) {
         // Set up lvManager to provide animation info
         self.lvManager = lvManager
@@ -23,6 +26,26 @@ open class Tank: UIView {
         // Avoid automatically generated constraints
         self.translatesAutoresizingMaskIntoConstraints = false
         self.layoutIfNeeded()
+        self.subscribeToLevelManager()
+    }
+    
+    private func subscribeToLevelManager() {
+        lvManager.color
+            .asObservable()
+            .observeOn(MainScheduler())
+            .distinctUntilChanged()
+            .subscribe(onNext: { [unowned self] (fillingColor) in
+                self.fillView.backgroundColor = fillingColor
+            }).disposed(by: disposeBag)
+        
+        // Observe lvManager direction update
+        // to get previous value and current value
+        Observable.zip(lvManager.direction.asObservable(), lvManager.direction.asObservable().skip(1))
+            .observeOn(MainScheduler())
+            .subscribe(onNext: { [unowned self] (old, new) in
+                self.fillView.updateConstraints(forDirectionChangefrom: old)
+            }).disposed(by: disposeBag)
+
     }
     
     public func updateLvManager(_ lm: LevelManager) -> Tank {
@@ -84,7 +107,7 @@ open class Tank: UIView {
     }
 
     public func fillUptheTank(completion: ((Bool)->Void)? = nil) {
-        // Drain the tank to empty state
+        // Fill the tank to full state
         lvManager.update(level: 1.0)
         // Animate tank to fill up to new state
         updateLevelProgress(withDuration: lvManager.duration, completion: completion)
@@ -125,7 +148,7 @@ open class Tank: UIView {
     }
     
     private func updateLevelProgress(withDuration d: Double, completion: ((Bool)->Void)? = nil) {
-        fillView.updateConstraints(withManager: lvManager)
+        fillView.updateLevelStateConstraint()
         
         // Optional completion block with default nil value
         // If completion is nil, set animation completion block
@@ -144,7 +167,7 @@ open class Tank: UIView {
             // Check if tank is full
             // if YES, dismiss tank view
             return { success in
-                if self.lvManager.level >= 1 || self.lvManager.duration != -1 {
+                if self.lvManager.level.value >= 1 || self.lvManager.duration != -1 {
                     self.dismiss()
                 }
             }
