@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     
     var tanks: [Tank?] = []
     var progressBar: Tank!
+    private let pink = UIColor(red: 255.0/255.0, green: 105.0/255.0, blue: 180.0/255.0, alpha: 1.0)
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -29,10 +30,10 @@ class ViewController: UIViewController {
     }
 
     private func addFullScreenTanks() {
-        let pink = UIColor(red: 255.0/255.0, green: 105.0/255.0, blue: 180.0/255.0, alpha: 1.0)
-        var colors: [UIColor] = [pink, .black, .blue, .lightGray, .orange]
-        var directions: [LevelMovingDirection] = [.leftToRight, .topDown, .rightToLeft, .bottomUp, .leftToRight]
-        var titles: [String] = ["richlu1018", "By", "Tank", "The", "Fill"]
+        
+        let colors: [UIColor] = [pink, .black, .blue, .lightGray, .orange]
+        let directions: [LevelMovingDirection] = [.leftToRight, .topDown, .rightToLeft, .bottomUp, .leftToRight]
+        let titles: [String] = ["richlu1018", "By", "Tank", "The", "Fill"]
         for i in 0..<colors.count {
             let manager = LevelManager(moveWithDirection: directions[i],
                                        duration: i == 0 ? 1.5 : 0.5,
@@ -64,6 +65,8 @@ class ViewController: UIViewController {
                 }
                 tanks[i]?.fillUptheTank(completion: { [unowned self] (_) in
                     if i == 0 {
+                        self.tanks[i]?.backgroundColor = .yellow
+                        self.tanks[i]?.lvManager.reverseDirection()
                         self.tanks[i]?.drainTheTank(completion: { (_) in
                             self.tanks[i]?.dismiss()
                             i -= 1
@@ -138,7 +141,11 @@ class ViewController: UIViewController {
     private func startPianoBarDrainAnimationGroup(with tanks: [Tank]) {
         UIView.animateKeyframes(withDuration: 1.0, delay: 0, options: .calculationModeLinear, animations: {
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1.0, animations: {
-                tanks.forEach({$0.drainTheTank()})
+                tanks.forEach { [unowned self] (tank) in
+                    tank.lvManager.update(color: self.pink)
+                    tank.lvManager.update(direction: .rightToLeft)
+                    tank.drainTheTank()
+                }
             })
         }, completion: nil)
     }
