@@ -1,5 +1,5 @@
 # FillTheTank
-![image](https://j.gifs.com/r8B58E.gif)
+![image](https://j.gifs.com/6XG4Vz.gif)
 
 A customizable container view with options for filling up animation.
 
@@ -8,6 +8,8 @@ A customizable container view with options for filling up animation.
 [![Platform](https://img.shields.io/cocoapods/p/FillTheTank.svg?style=flat)](http://cocoadocs.org/docsets/FillTheTank) 
 [![CocoaPod](https://img.shields.io/cocoapods/v/FillTheTank.svg?style=flat)](https://cocoapods.org/pods/FillTheTank)
 
+## What's New In v1.2.0
+- LevelManager can be updated with direction, color and duration to create more interesting animations 
 
 ## Installation
 
