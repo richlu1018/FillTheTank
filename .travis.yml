@@ -1,21 +1,29 @@
 language: objective-c
 osx_image: xcode10.2
+podfile: FillTheTank/Podfile
 env:
   global:
   - LC_CTYPE=en_US.UTF-8
   - LANG=en_US.UTF-8
   - PROJECT=FillTheTank.xcodeproj
+  - WORKSPACE=FillTheTank/FillTheTank.xcworkspace
   - IOS_SDK=iphonesimulator12.2
   - IOS_FRAMEWORK_SCHEME="FillTheTank"
   - EXAMPLE_SCHEME="FillTheTankDemo"
   matrix:
-    - DESTINATION="OS=12.2,name=iPhone Xs"     SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES" BUILD_EXAMPLE="NO" POD_LINT="YES"
+    - DESTINATION="OS=12.2,name=iPhone Xs"     SCHEME="$IOS_FRAMEWORK_SCHEME" SDK="$IOS_SDK"     RUN_TESTS="YES" BUILD_EXAMPLE="NO" POD_LINT="YES"
+
+cache: cocoapods
+before_install:
+- gem install cocoapods # Since Travis is not always on latest version
+- pod install
+
 script:
   - set -o pipefail
   - xcodebuild -version
   - xcodebuild -showsdks
   - xcodebuild -list
-  - xcodebuild -project "$PROJECT" -scheme "$IOS_FRAMEWORK_SCHEME" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES   test | xcpretty;
+  - xcodebuild -project "$PROJECT" -scheme "$IOS_FRAMEWORK_SCHEME" -workspace "$WORKSPACE" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES   test | xcpretty;
 
 notifications:
   slack:
