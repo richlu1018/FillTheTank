@@ -7,8 +7,8 @@ target 'FillTheTank' do
   
   # Pods for FillTheTank
   
-  pod 'RxSwift'
-  pod 'RxCocoa'
+  pod 'RxSwift', '~> 5'
+  pod 'RxCocoa', '~> 5'
 
   target 'FillTheTankTests' do
     inherit! :search_paths
