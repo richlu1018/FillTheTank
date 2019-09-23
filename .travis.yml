@@ -16,7 +16,7 @@ env:
 cache: cocoapods
 before_install:
 - gem install cocoapods # Since Travis is not always on latest version
-- pod install
+- pod install --repo-update
 
 script:
   - set -o pipefail
