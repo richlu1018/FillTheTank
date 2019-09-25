@@ -7,10 +7,12 @@
 //
 
 import XCTest
+import RxSwift
+
 @testable import FillTheTank
 
 class FillTheTankTests: XCTestCase {
-
+    
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -19,32 +21,7 @@ class FillTheTankTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testLevelManagerInit() {
-        let cManager = LevelManager(moveWithDirection: .topDown, duration: 3.0, initLevel: 0.0, fillingsColor: .gray)
-        XCTAssert(cManager.direction.value == .topDown)
-        XCTAssert(cManager.duration == 3.0)
-        XCTAssert(cManager.color.value == .gray)
-        XCTAssert(cManager.level.value == 0.0)
-    }
     
-    func testValidProgress() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        var manager = LevelManager(moveWithDirection: .bottomUp, duration: 0.1, initLevel: 0.0, fillingsColor: .green)
-        manager.update(level: -1)
-        XCTAssert(manager.level.value == 0)
-        manager.update(level: 2)
-        XCTAssert(manager.level.value == 1)
-        manager.update(level: 0.99)
-        XCTAssert(manager.level.value == 0.99)
-    }
-
-    func textTankTitleLabelSetUp() {
-        let manager = LevelManager(moveWithDirection: .bottomUp, duration: 1.0, initLevel: 0, fillingsColor: .green)
-        let tank = Tank(lvManager: manager)
-            .titleLabel(attributedString: "Test", withAttributes: [.font: UIFont.systemFont(ofSize: 12)])
-        XCTAssertTrue(tank.titleLabel != nil)
-    }
 
     func testPerformanceExample() {
         // This is an example of a performance test case.

@@ -3,10 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03B1AB20233B453E00617382 /* ContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B1AB1F233B453E00617382 /* ContainerViewModel.swift */; };
+		03B1AB22233B47D900617382 /* FillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B1AB21233B47D900617382 /* FillViewModel.swift */; };
+		03B1AB24233BCE0400617382 /* Containable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B1AB23233BCE0400617382 /* Containable.swift */; };
+		03BF243C233A2E1F0039E7E0 /* Fillable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BF243B233A2E1F0039E7E0 /* Fillable.swift */; };
+		03BF243E233A2E410039E7E0 /* Directional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BF243D233A2E410039E7E0 /* Directional.swift */; };
+		03BF2440233A2E790039E7E0 /* Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BF243F233A2E790039E7E0 /* Animatable.swift */; };
+		03BF2442233A2E9D0039E7E0 /* DirectionalFillable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BF2441233A2E9D0039E7E0 /* DirectionalFillable.swift */; };
+		03BF2450233B451A0039E7E0 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BF244F233B451A0039E7E0 /* ContainerView.swift */; };
 		03C1682C23325E8C00C6B65E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C1682B23325E8C00C6B65E /* AppDelegate.swift */; };
 		03C1682E23325E8C00C6B65E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C1682D23325E8C00C6B65E /* ViewController.swift */; };
 		03C1683123325E8C00C6B65E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03C1682F23325E8C00C6B65E /* Main.storyboard */; };
@@ -18,9 +26,7 @@
 		03C168D523327FEC00C6B65E /* FillTheTank.h in Headers */ = {isa = PBXBuildFile; fileRef = 03C168C523327FEC00C6B65E /* FillTheTank.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		03C168D823327FEC00C6B65E /* FillTheTank.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03C168C323327FEC00C6B65E /* FillTheTank.framework */; };
 		03C168D923327FEC00C6B65E /* FillTheTank.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 03C168C323327FEC00C6B65E /* FillTheTank.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		03C168E023327FF600C6B65E /* Filling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345DD052330911F0079CC8C /* Filling.swift */; };
-		03C168E123327FF600C6B65E /* Tank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345DD03233080860079CC8C /* Tank.swift */; };
-		03C168E223327FF600C6B65E /* LevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0385C83323308A28008099E1 /* LevelManager.swift */; };
+		03C168E023327FF600C6B65E /* FillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345DD052330911F0079CC8C /* FillView.swift */; };
 		03C168E42333110200C6B65E /* FillTheTankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C168E32333110200C6B65E /* FillTheTankTests.swift */; };
 		53A19955577C8ED5AA0E4BAC /* Pods_FillTheTankDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A170EA22F3A29AC1ED3B87 /* Pods_FillTheTankDemo.framework */; };
 		609D4C96B3C8C2AE9A868017 /* Pods_FillTheTankTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9923A8688A0D304470B7E6E /* Pods_FillTheTankTests.framework */; };
@@ -82,9 +88,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0345DD03233080860079CC8C /* Tank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tank.swift; sourceTree = "<group>"; };
-		0345DD052330911F0079CC8C /* Filling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filling.swift; sourceTree = "<group>"; };
-		0385C83323308A28008099E1 /* LevelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelManager.swift; sourceTree = "<group>"; };
+		0345DD052330911F0079CC8C /* FillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillView.swift; sourceTree = "<group>"; };
+		03B1AB1F233B453E00617382 /* ContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewModel.swift; sourceTree = "<group>"; };
+		03B1AB21233B47D900617382 /* FillViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillViewModel.swift; sourceTree = "<group>"; };
+		03B1AB23233BCE0400617382 /* Containable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Containable.swift; sourceTree = "<group>"; };
+		03BF243B233A2E1F0039E7E0 /* Fillable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fillable.swift; sourceTree = "<group>"; };
+		03BF243D233A2E410039E7E0 /* Directional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Directional.swift; sourceTree = "<group>"; };
+		03BF243F233A2E790039E7E0 /* Animatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animatable.swift; sourceTree = "<group>"; };
+		03BF2441233A2E9D0039E7E0 /* DirectionalFillable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionalFillable.swift; sourceTree = "<group>"; };
+		03BF244F233B451A0039E7E0 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
 		03C1682923325E8C00C6B65E /* FillTheTankDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FillTheTankDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03C1682B23325E8C00C6B65E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03C1682D23325E8C00C6B65E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -193,6 +205,43 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		03BF243A233A2E120039E7E0 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				03BF243B233A2E1F0039E7E0 /* Fillable.swift */,
+				03B1AB23233BCE0400617382 /* Containable.swift */,
+				03BF243D233A2E410039E7E0 /* Directional.swift */,
+				03BF2441233A2E9D0039E7E0 /* DirectionalFillable.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		03BF2445233A2F0A0039E7E0 /* Fillings */ = {
+			isa = PBXGroup;
+			children = (
+				0345DD052330911F0079CC8C /* FillView.swift */,
+				03B1AB21233B47D900617382 /* FillViewModel.swift */,
+			);
+			path = Fillings;
+			sourceTree = "<group>";
+		};
+		03BF2448233A312E0039E7E0 /* Animator */ = {
+			isa = PBXGroup;
+			children = (
+				03BF243F233A2E790039E7E0 /* Animatable.swift */,
+			);
+			path = Animator;
+			sourceTree = "<group>";
+		};
+		03BF244E233B45070039E7E0 /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				03BF244F233B451A0039E7E0 /* ContainerView.swift */,
+				03B1AB1F233B453E00617382 /* ContainerViewModel.swift */,
+			);
+			path = Container;
+			sourceTree = "<group>";
+		};
 		03C1682A23325E8C00C6B65E /* FillTheTankDemo */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,9 +276,10 @@
 		03C168C423327FEC00C6B65E /* FillTheTank */ = {
 			isa = PBXGroup;
 			children = (
-				0345DD03233080860079CC8C /* Tank.swift */,
-				0385C83323308A28008099E1 /* LevelManager.swift */,
-				0345DD052330911F0079CC8C /* Filling.swift */,
+				03BF244E233B45070039E7E0 /* Container */,
+				03BF2448233A312E0039E7E0 /* Animator */,
+				03BF2445233A2F0A0039E7E0 /* Fillings */,
+				03BF243A233A2E120039E7E0 /* Protocol */,
 				03C168C523327FEC00C6B65E /* FillTheTank.h */,
 				03C168C623327FEC00C6B65E /* Info.plist */,
 			);
@@ -259,7 +309,6 @@
 				EAA53760F4A6E4C81AAA3667 /* Pods-FillTheTankTests.debug.xcconfig */,
 				FC31AC4C1635A401938FBF06 /* Pods-FillTheTankTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -640,9 +689,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03C168E123327FF600C6B65E /* Tank.swift in Sources */,
-				03C168E223327FF600C6B65E /* LevelManager.swift in Sources */,
-				03C168E023327FF600C6B65E /* Filling.swift in Sources */,
+				03BF2450233B451A0039E7E0 /* ContainerView.swift in Sources */,
+				03BF243C233A2E1F0039E7E0 /* Fillable.swift in Sources */,
+				03BF2440233A2E790039E7E0 /* Animatable.swift in Sources */,
+				03BF243E233A2E410039E7E0 /* Directional.swift in Sources */,
+				03B1AB20233B453E00617382 /* ContainerViewModel.swift in Sources */,
+				03BF2442233A2E9D0039E7E0 /* DirectionalFillable.swift in Sources */,
+				03B1AB24233BCE0400617382 /* Containable.swift in Sources */,
+				03C168E023327FF600C6B65E /* FillView.swift in Sources */,
+				03B1AB22233B47D900617382 /* FillViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
