@@ -11,7 +11,8 @@ import RxRelay
 import RxSwift
 
 public final class RightToLeftFillViewModel: HorizontalFillable {
-    public var widthConstraint: NSLayoutConstraint!
+    public var fixedEndConstraints: [NSLayoutConstraint]!
+    public var spanConstraint: NSLayoutConstraint!
     public var fillColor: UIColor
     public var currLevel: Double!
     public var fillUpDirection: LevelMovingDirection = .rightToLeft
@@ -23,7 +24,8 @@ public final class RightToLeftFillViewModel: HorizontalFillable {
 }
 
 public final class LeftToRightFillViewModel: HorizontalFillable {
-    public var widthConstraint: NSLayoutConstraint!
+    public var fixedEndConstraints: [NSLayoutConstraint]!
+    public var spanConstraint: NSLayoutConstraint!
     public var fillColor: UIColor
     public var currLevel: Double!
     public var fillUpDirection: LevelMovingDirection = .leftToRight
@@ -35,7 +37,8 @@ public final class LeftToRightFillViewModel: HorizontalFillable {
 }
 
 public final class TopDownFillViewModel: VerticalFillable {
-    public var heightConstraint: NSLayoutConstraint!
+    public var fixedEndConstraints: [NSLayoutConstraint]!
+    public var spanConstraint: NSLayoutConstraint!
     public var fillColor: UIColor
     public var currLevel: Double!
     public var fillUpDirection: LevelMovingDirection = .topDown
@@ -47,7 +50,8 @@ public final class TopDownFillViewModel: VerticalFillable {
 }
 
 public final class BottomUpFillViewModel: VerticalFillable {
-    public var heightConstraint: NSLayoutConstraint!
+    public var fixedEndConstraints: [NSLayoutConstraint]!
+    public var spanConstraint: NSLayoutConstraint!
     public var fillColor: UIColor
     public var currLevel: Double!
     public var fillUpDirection: LevelMovingDirection = .bottomUp
