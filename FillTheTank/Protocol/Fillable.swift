@@ -10,14 +10,14 @@ import Foundation
 import RxSwift
 
 public enum FillColor {
-    case fillColor(UIColor)
+    case customColor(UIColor)
 }
 
 extension FillColor {
     var color: UIColor {
         get {
             switch self {
-            case .fillColor(let color):
+            case .customColor(let color):
                 return color
             }
         }
@@ -26,9 +26,8 @@ extension FillColor {
 
 public protocol Fillable {
     var fillColor: FillColor { get set }
-    var currLevel: Double! { get set }
-    mutating func update(level: Double, inContainerView cView: UIView)
+    var currLevel: CGFloat! { get set }
+    mutating func update(level: CGFloat, inContainerView cView: UIView)
     var onUpdateView: PublishSubject<Bool> { get set }
 }
-
 

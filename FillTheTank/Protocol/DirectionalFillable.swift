@@ -15,12 +15,15 @@ public protocol DirectionalFillable: Fillable, Directional {
 }
 
 extension DirectionalFillable {
-    mutating public func update(level: Double, inContainerView cView: UIView) {
+    mutating public func update(level: CGFloat, inContainerView cView: UIView) {
         cView.layoutIfNeeded()
         spanConstraint.isActive = false
-        let currConstant = spanConstraint.constant == 0 ?
-            CGFloat.leastNormalMagnitude : spanConstraint.constant
-        spanConstraint.constant = currConstant * CGFloat(level)/CGFloat(currLevel == 0 ? Double.leastNormalMagnitude : currLevel)
+        switch fillUpDirection {
+        case .bottomUp, .topDown:
+            spanConstraint.constant = cView.frame.height * level
+        case .leftToRight, .rightToLeft:
+            spanConstraint.constant = cView.frame.height * level
+        }
         spanConstraint.isActive = true
         onUpdateView.onNext(true)
         currLevel = level

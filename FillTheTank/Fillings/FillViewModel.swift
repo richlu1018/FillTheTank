@@ -14,12 +14,12 @@ public final class RightToLeftFillViewModel: HorizontalFillable {
     public var fixedEndConstraints: [NSLayoutConstraint]!
     public var spanConstraint: NSLayoutConstraint!
     public var fillColor: FillColor
-    public var currLevel: Double!
+    public var currLevel: CGFloat!
     public var fillUpDirection: LevelMovingDirection = .rightToLeft
     public var onUpdateView = PublishSubject<Bool>()
-    public init(initLevel: Double, fillColor: UIColor) {
+    public init(initLevel: CGFloat, fillColor: FillColor) {
         self.currLevel = initLevel
-        self.fillColor = .fillColor(fillColor)
+        self.fillColor = fillColor
     }
 }
 
@@ -27,12 +27,12 @@ public final class LeftToRightFillViewModel: HorizontalFillable {
     public var fixedEndConstraints: [NSLayoutConstraint]!
     public var spanConstraint: NSLayoutConstraint!
     public var fillColor: FillColor
-    public var currLevel: Double!
+    public var currLevel: CGFloat!
     public var fillUpDirection: LevelMovingDirection = .leftToRight
     public var onUpdateView = PublishSubject<Bool>()
-    public init(initLevel: Double, fillColor: UIColor) {
+    public init(initLevel: CGFloat, fillColor: FillColor) {
         self.currLevel = initLevel
-        self.fillColor = .fillColor(fillColor)
+        self.fillColor = fillColor
     }
 }
 
@@ -40,12 +40,12 @@ public final class TopDownFillViewModel: VerticalFillable {
     public var fixedEndConstraints: [NSLayoutConstraint]!
     public var spanConstraint: NSLayoutConstraint!
     public var fillColor: FillColor
-    public var currLevel: Double!
+    public var currLevel: CGFloat!
     public var fillUpDirection: LevelMovingDirection = .topDown
     public var onUpdateView = PublishSubject<Bool>()
-    public init(initLevel: Double, fillColor: UIColor) {
+    public init(initLevel: CGFloat, fillColor: FillColor) {
         self.currLevel = initLevel
-        self.fillColor = .fillColor(fillColor)
+        self.fillColor = fillColor
     }
 }
 
@@ -53,11 +53,11 @@ public final class BottomUpFillViewModel: VerticalFillable {
     public var fixedEndConstraints: [NSLayoutConstraint]!
     public var spanConstraint: NSLayoutConstraint!
     public var fillColor: FillColor
-    public var currLevel: Double!
+    public var currLevel: CGFloat!
     public var fillUpDirection: LevelMovingDirection = .bottomUp
     public var onUpdateView = PublishSubject<Bool>()
-    public init(initLevel: Double, fillColor: UIColor) {
+    public init(initLevel: CGFloat, fillColor: FillColor) {
         self.currLevel = initLevel
-        self.fillColor = .fillColor(fillColor)
+        self.fillColor = fillColor
     }
 }
