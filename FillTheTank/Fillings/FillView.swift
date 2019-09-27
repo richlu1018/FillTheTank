@@ -21,7 +21,7 @@ public class FillView: UIView, Animatable {
         viewModel = model
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundColor = viewModel.fillColor
+        self.backgroundColor = viewModel.fillColor.color
         initSetUp()
     }
     

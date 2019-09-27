@@ -13,51 +13,51 @@ import RxSwift
 public final class RightToLeftFillViewModel: HorizontalFillable {
     public var fixedEndConstraints: [NSLayoutConstraint]!
     public var spanConstraint: NSLayoutConstraint!
-    public var fillColor: UIColor
+    public var fillColor: FillColor
     public var currLevel: Double!
     public var fillUpDirection: LevelMovingDirection = .rightToLeft
     public var onUpdateView = PublishSubject<Bool>()
     public init(initLevel: Double, fillColor: UIColor) {
         self.currLevel = initLevel
-        self.fillColor = fillColor
+        self.fillColor = .fillColor(fillColor)
     }
 }
 
 public final class LeftToRightFillViewModel: HorizontalFillable {
     public var fixedEndConstraints: [NSLayoutConstraint]!
     public var spanConstraint: NSLayoutConstraint!
-    public var fillColor: UIColor
+    public var fillColor: FillColor
     public var currLevel: Double!
     public var fillUpDirection: LevelMovingDirection = .leftToRight
     public var onUpdateView = PublishSubject<Bool>()
     public init(initLevel: Double, fillColor: UIColor) {
         self.currLevel = initLevel
-        self.fillColor = fillColor
+        self.fillColor = .fillColor(fillColor)
     }
 }
 
 public final class TopDownFillViewModel: VerticalFillable {
     public var fixedEndConstraints: [NSLayoutConstraint]!
     public var spanConstraint: NSLayoutConstraint!
-    public var fillColor: UIColor
+    public var fillColor: FillColor
     public var currLevel: Double!
     public var fillUpDirection: LevelMovingDirection = .topDown
     public var onUpdateView = PublishSubject<Bool>()
     public init(initLevel: Double, fillColor: UIColor) {
         self.currLevel = initLevel
-        self.fillColor = fillColor
+        self.fillColor = .fillColor(fillColor)
     }
 }
 
 public final class BottomUpFillViewModel: VerticalFillable {
     public var fixedEndConstraints: [NSLayoutConstraint]!
     public var spanConstraint: NSLayoutConstraint!
-    public var fillColor: UIColor
+    public var fillColor: FillColor
     public var currLevel: Double!
     public var fillUpDirection: LevelMovingDirection = .bottomUp
     public var onUpdateView = PublishSubject<Bool>()
     public init(initLevel: Double, fillColor: UIColor) {
         self.currLevel = initLevel
-        self.fillColor = fillColor
+        self.fillColor = .fillColor(fillColor)
     }
 }

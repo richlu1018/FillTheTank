@@ -9,8 +9,23 @@
 import Foundation
 import RxSwift
 
+public enum FillColor {
+    case fillColor(UIColor)
+}
+
+extension FillColor {
+    var color: UIColor {
+        get {
+            switch self {
+            case .fillColor(let color):
+                return color
+            }
+        }
+    }
+}
+
 public protocol Fillable {
-    var fillColor: UIColor { get set }
+    var fillColor: FillColor { get set }
     var currLevel: Double! { get set }
     mutating func update(level: Double, inContainerView cView: UIView)
     var onUpdateView: PublishSubject<Bool> { get set }
