@@ -31,17 +31,11 @@ class ViewController: UIViewController {
             container.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             container.heightAnchor.constraint(equalToConstant: 50)])
         
-        var topDownfillViewModel: DirectionalFillable = TopDownFillViewModel(initLevel: 0.0, fillColor: .customColor(.orange))
-        let fillView = FillView(model: topDownfillViewModel, animateDuration: 5.0)
+        var topDownfillViewModel: DirectionalFillable = BottomUpFillViewModel(initLevel: 0.0, fillColor: .customColor(.orange))
+        let fillView = FillView(model: topDownfillViewModel, animateDuration: 2.0)
         let containerViewModel = ContainerViewModel(fillView: fillView)
         container.insertContainerViewModel(model: containerViewModel, disposeBag: disposeBag)
-        topDownfillViewModel.update(level: 1.0, inContainerView: container)
-        
-        var LRFillViewModel = LeftToRightFillViewModel(initLevel: 1.0, fillColor: .customColor(.blue))
-        let LRFillView = FillView(model:LRFillViewModel, animateDuration: 2.0)
-        let cViewModel = ContainerViewModel(fillView: LRFillView)
-        container.insertContainerViewModel(model: cViewModel, disposeBag: disposeBag)
-        LRFillViewModel.update(level: 0.0, inContainerView: container)
+        topDownfillViewModel.update(level: 1.0, ofFillView: fillView)
     }
 
     override func viewDidAppear(_ animated: Bool) {

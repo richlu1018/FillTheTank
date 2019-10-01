@@ -14,7 +14,7 @@
 		03BF243E233A2E410039E7E0 /* Directional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BF243D233A2E410039E7E0 /* Directional.swift */; };
 		03BF2440233A2E790039E7E0 /* Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BF243F233A2E790039E7E0 /* Animatable.swift */; };
 		03BF2442233A2E9D0039E7E0 /* DirectionalFillable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BF2441233A2E9D0039E7E0 /* DirectionalFillable.swift */; };
-		03BF2450233B451A0039E7E0 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BF244F233B451A0039E7E0 /* ContainerView.swift */; };
+		03BF2450233B451A0039E7E0 /* UIView+Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BF244F233B451A0039E7E0 /* UIView+Container.swift */; };
 		03C1682C23325E8C00C6B65E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C1682B23325E8C00C6B65E /* AppDelegate.swift */; };
 		03C1682E23325E8C00C6B65E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C1682D23325E8C00C6B65E /* ViewController.swift */; };
 		03C1683123325E8C00C6B65E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03C1682F23325E8C00C6B65E /* Main.storyboard */; };
@@ -96,7 +96,7 @@
 		03BF243D233A2E410039E7E0 /* Directional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Directional.swift; sourceTree = "<group>"; };
 		03BF243F233A2E790039E7E0 /* Animatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animatable.swift; sourceTree = "<group>"; };
 		03BF2441233A2E9D0039E7E0 /* DirectionalFillable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionalFillable.swift; sourceTree = "<group>"; };
-		03BF244F233B451A0039E7E0 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
+		03BF244F233B451A0039E7E0 /* UIView+Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Container.swift"; sourceTree = "<group>"; };
 		03C1682923325E8C00C6B65E /* FillTheTankDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FillTheTankDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03C1682B23325E8C00C6B65E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03C1682D23325E8C00C6B65E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -236,7 +236,7 @@
 		03BF244E233B45070039E7E0 /* Container */ = {
 			isa = PBXGroup;
 			children = (
-				03BF244F233B451A0039E7E0 /* ContainerView.swift */,
+				03BF244F233B451A0039E7E0 /* UIView+Container.swift */,
 				03B1AB1F233B453E00617382 /* ContainerViewModel.swift */,
 			);
 			path = Container;
@@ -689,7 +689,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03BF2450233B451A0039E7E0 /* ContainerView.swift in Sources */,
+				03BF2450233B451A0039E7E0 /* UIView+Container.swift in Sources */,
 				03BF243C233A2E1F0039E7E0 /* Fillable.swift in Sources */,
 				03BF2440233A2E790039E7E0 /* Animatable.swift in Sources */,
 				03BF243E233A2E410039E7E0 /* Directional.swift in Sources */,

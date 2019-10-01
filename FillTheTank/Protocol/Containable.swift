@@ -11,12 +11,4 @@ import RxSwift
 
 public protocol Containable {
     var fillViewSubject: BehaviorSubject<FillView> { get set }
-    func setUpConstraints(toView v: UIView)
-}
-
-extension Containable {
-    public func setUpConstraints(toView v: UIView) {
-        let fillView = try! fillViewSubject.value()
-        fillView.viewModel.setUpConstraints(forFillView: fillView, toView: v)
-    }
 }

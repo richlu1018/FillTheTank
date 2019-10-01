@@ -27,7 +27,7 @@ extension FillColor {
 public protocol Fillable {
     var fillColor: FillColor { get set }
     var currLevel: CGFloat! { get set }
-    mutating func update(level: CGFloat, inContainerView cView: UIView)
+    mutating func update(level: CGFloat, ofFillView: FillView)
     var onUpdateView: PublishSubject<Bool> { get set }
 }
 

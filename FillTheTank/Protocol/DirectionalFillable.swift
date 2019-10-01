@@ -11,22 +11,16 @@ import Foundation
 public protocol DirectionalFillable: Fillable, Directional {
     var fixedEndConstraints: [NSLayoutConstraint]! { get set }
     var spanConstraint: NSLayoutConstraint! { get set }
-    mutating func setUpConstraints(forFillView fillView: UIView, toView: UIView)
+    mutating func setUpConstraints(forFillView fillView: UIView)
+    mutating func updateConstraints(forFillView fillView: UIView)
 }
 
 extension DirectionalFillable {
-    mutating public func update(level: CGFloat, inContainerView cView: UIView) {
-        cView.layoutIfNeeded()
-        spanConstraint.isActive = false
-        switch fillUpDirection {
-        case .bottomUp, .topDown:
-            spanConstraint.constant = cView.frame.height * level
-        case .leftToRight, .rightToLeft:
-            spanConstraint.constant = cView.frame.height * level
-        }
-        spanConstraint.isActive = true
-        onUpdateView.onNext(true)
+    mutating public func update(level: CGFloat, ofFillView fillView: FillView) {
         currLevel = level
+        updateConstraints(forFillView: fillView)
+        onUpdateView.onNext(true)
+        
     }
 }
 
@@ -35,8 +29,9 @@ public protocol HorizontalFillable: DirectionalFillable {}
 public protocol VerticalFillable: DirectionalFillable {}
 
 extension HorizontalFillable {
-    mutating public func setUpConstraints(forFillView fillView: UIView, toView v: UIView) {
-        
+    mutating public func setUpConstraints(forFillView fillView: UIView) {
+        guard let v = fillView.superview else { return }
+        v.layoutIfNeeded()
         let sideConstraint = fillUpDirection == .rightToLeft ?
             fillView.rightAnchor.constraint(equalTo: v.rightAnchor, constant: 0) :
             fillView.leftAnchor.constraint(equalTo: v.leftAnchor, constant: 0)
@@ -51,14 +46,20 @@ extension HorizontalFillable {
         
         NSLayoutConstraint.activate(fixedEndConstraints)
         spanConstraint.isActive = true
-        
-        v.layoutIfNeeded()
+    }
+
+    mutating public func updateConstraints(forFillView fillView: UIView) {
+        guard let v = fillView.superview else { return }
+        spanConstraint.isActive = false
+        spanConstraint = fillView.widthAnchor.constraint(equalToConstant: v.frame.width * CGFloat(currLevel))
+        spanConstraint.isActive = true
     }
 }
 
 extension VerticalFillable {
-    mutating public func setUpConstraints(forFillView fillView: UIView, toView v: UIView) {
-        
+    mutating public func setUpConstraints(forFillView fillView: UIView) {
+        guard let v = fillView.superview else { return }
+        v.layoutIfNeeded()
         let topBottomConstraint = fillUpDirection == .bottomUp ? fillView.bottomAnchor.constraint(equalTo: v.bottomAnchor, constant: 0) : fillView.topAnchor.constraint(equalTo: v.topAnchor, constant: 0)
         
         fixedEndConstraints = [
@@ -68,9 +69,14 @@ extension VerticalFillable {
         ]
         
         spanConstraint = fillView.heightAnchor.constraint(equalToConstant: v.frame.height * CGFloat(currLevel))
-        
         NSLayoutConstraint.activate(fixedEndConstraints)
         spanConstraint.isActive = true
-        v.layoutIfNeeded()
+    }
+    
+    mutating public func updateConstraints(forFillView fillView: UIView) {
+        guard let v = fillView.superview else { return }
+        spanConstraint.isActive = false
+        spanConstraint = fillView.heightAnchor.constraint(equalToConstant: v.frame.height * CGFloat(currLevel))
+        spanConstraint.isActive = true
     }
 }

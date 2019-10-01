@@ -34,7 +34,12 @@ public class FillView: UIView, Animatable {
             .asObservable()
             .observeOn(MainScheduler())
             .subscribe(onNext: {[unowned self] (update) in
+                self.backgroundColor = self.viewModel.fillColor.color
+                self.updateConstraints()
                 self.animateForChanges()
         }).disposed(by: disposeBag)
+    }
+    public func setUpConstraints() {
+        viewModel.setUpConstraints(forFillView: self)
     }
 }
